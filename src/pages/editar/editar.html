@@ -1,0 +1,54 @@
+<!--
+Generated template for the EditarPage page.
+
+See http://ionicframework.com/docs/components/#navigation for more info on
+Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>editar</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+      <ion-label floating="">Tipo de atividade</ion-label>
+      <ion-input type="text" [(ngModel)]="this.atividade.tipoAtividade"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating="">Descrição</ion-label>
+      <ion-input type="text"  [(ngModel)]="this.atividade.descricao"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating="">Data de entrega</ion-label>
+      <ion-input type="number" [(ngModel)]="this.atividade.dataEntrega"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating="">Observação</ion-label>
+      <ion-input type="text" [(ngModel)]="this.atividade.observacao"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button round full (click)="alterarAtividade()">ALTERAR</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button round full color="danger" (click)="removerAtividade()">REMOVER</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button round full (click)="cancelarOperacao()">CANCELAR</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

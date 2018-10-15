@@ -1,7 +1,8 @@
 export class Atividade {
-    tipoAtividade: string;
-    descricao: string;
-    observacao: string;
-    dataEntrega: string;
+  key?: string;
+  tipoAtividade: string;
+  descricao: string;
+  observacao: string;
+  dataEntrega: string;
 
 }

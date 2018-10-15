@@ -4,6 +4,16 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import * as firebase from 'firebase';
+
+const config = {
+  apiKey: "AIzaSyB14xRVrrGwatyMFXU-GVJKvEgB_dX7wcA",
+  authDomain: "controleatividades-a4922.firebaseapp.com",
+  databaseURL: "https://controleatividades-a4922.firebaseio.com",
+  projectId: "controleatividades-a4922",
+  storageBucket: "controleatividades-a4922.appspot.com",
+  messagingSenderId: "226885259623"
+};
 
 @Component({
   templateUrl: 'app.html'
@@ -18,5 +28,6 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+    firebase.initializeApp(config);
   }
 }

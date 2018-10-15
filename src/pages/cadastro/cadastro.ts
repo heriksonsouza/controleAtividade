@@ -1,16 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/retry';
 import { Atividade } from '../../modelo/atividade';
-import { Storage } from '@ionic/storage';
-//import { Database } from '../../data/database';
-/**
- * Generated class for the CadastroPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {EditarPage} from '../editar/editar';
+import {AtividadeService} from '../../service/atividade.service';
+import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import {AngularFirestoreCollection} from 'angularfire2/firestore';
+import {Observable} from 'rxjs/Observable';
+//import * as firebase from 'firebase';
+
 
 @IonicPage()
 @Component({
@@ -18,11 +15,27 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'cadastro.html',
 })
 export class CadastroPage {
+
+  private atividade: Atividade = new Atividade();
+  items: Observable<Atividade[]>
+
+  /*
   atividade: Atividade = new Atividade();
-  atividades:Atividade[] = [];
+  ref = firebase.database().ref("atividade/");
+  atividades = [];
+  //atividades:Atividade[] = [];
+*/
 
+  constructor(public navCtrl: NavController, private atividadeService: AtividadeService) {
+this.items = this.atividadeService.getAtividades().valueChanges();
 
-  constructor(public navCtrl: NavController, public storage: Storage) {
+/*
+    this.ref.on('value', resp =>{
+      this.atividades = [];
+      this.atividades = snapshotToArray(resp);
+
+    });
+    */
   }
 
   ionViewDidLoad() {
@@ -30,36 +43,36 @@ export class CadastroPage {
   }
 
   cadastrarAtividade(){
-    this.storage.get('listAtividades').then((data) =>{
-      //console.log("dataaaaa: "+data);
-      if (data==null){
-        //console.log("no null");
-        this.atividades.push(this.atividade);
-        this.storage.set('listAtividades', this.atividades);
-      //return this.atividades;
-      } else {
-        //console.log("no elseeeeee::: "+data[0].descricao);
-        data.push(this.atividade);
-        this.storage.set('listAtividades', data);
-        //return data;
-      }
-      this.navCtrl.pop();
-    });
+    this.atividadeService.addAtividade(this.atividade);
+/*
+    let novoAtividade = this.ref.push();
+    novoAtividade.set(this.atividade);
+*/
+  }
 
-      //this.storage.remove("listAtividades");
-    //this.atividades = this.buscarListaAtividades();
-    //console.log("aquiii");
-    //this.atividades.push(this.atividade);
-    //this.storage.set('listAtividades', this.atividades);
-
+  editarRemover(atividadeEditarRemover: Atividade){
+    this.navCtrl.push(EditarPage, {atividade: atividadeEditarRemover});
   }
 
   cancelarOperacao(){
-  this.navCtrl.pop();
+    this.navCtrl.pop();
   }
   /*buscarListaAtividades():Atividade[]{
 
-  }*/
+}*/
 
-  //---------------------------------------------------------------------
+//---------------------------------------------------------------------
 }
+
+export const snapshotToArray = snapshot => {
+  var returnArr = [];
+
+  snapshot.forEach(function(childSnapshot) {
+    var item = childSnapshot.val();
+    item.key = childSnapshot.key;
+
+    returnArr.push(item);
+  });
+
+  return returnArr;
+};

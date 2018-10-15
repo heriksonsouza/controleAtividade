@@ -18,22 +18,22 @@
   <ion-list>
   <ion-item>
     <ion-label floating="">Tipo de atividade</ion-label>
-    <ion-input type="text" [(ngModel)]="atividade.tipoAtividade"></ion-input>
+    <ion-input type="text" [(ngModel)]="this.atividade.tipoAtividade"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating="">Descrição</ion-label>
-    <ion-input type="text"  [(ngModel)]="atividade.descricao"></ion-input>
+    <ion-input type="text"  [(ngModel)]="this.atividade.descricao"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating="">Data de entrega</ion-label>
-    <ion-input type="number" [(ngModel)]="atividade.dataEntrega"></ion-input>
+    <ion-input type="number" [(ngModel)]="this.atividade.dataEntrega"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating="">Observação</ion-label>
-    <ion-input type="text" [(ngModel)]="atividade.observacao"></ion-input>
+    <ion-input type="text" [(ngModel)]="this.atividade.observacao"></ion-input>
   </ion-item>
 </ion-list>
 
@@ -43,9 +43,18 @@
     <button ion-button round full (click)="cadastrarAtividade()">SALVAR</button>
     </ion-col>
     <ion-col>
-    <button ion-button round full color="danger" (click)="cancelarOperacao()">CANCELAR</button>
+    <button ion-button round full (click)="cancelarOperacao()">CANCELAR</button>
     </ion-col>
   </ion-row>
 </ion-grid>
+
+<h4>Lista de Atividades</h4>
+<ion-list>
+  <ion-item *ngFor="let atv of atividades | async" (click)="editarRemover(atv)">
+    <h2>{{atividade.tipoAtividade}}</h2>
+    <h3>{{atividade.descricao}}</h3>
+    <h3>{{atividade.dataEntrega}}</h3>
+  </ion-item>
+</ion-list>
 
 </ion-content>

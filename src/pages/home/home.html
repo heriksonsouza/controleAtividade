@@ -8,13 +8,4 @@
 <h2>Cadastro de Atividades</h2>
 <button ion-button full round (click)="chamarCadastroPage()">Efetuar Cadastro</button>
 
-<h4>Lista de Atividades</h4>
-<ion-list>
-  <ion-item *ngFor="let atividade of atividades">
-    <h4>{{atividade.tipoAtividade}}</h4>
-    <h3>{{atividade.descricao}}</h3>
-    <h3>{{atividade.dataEntrega}}</h3>
-  </ion-item>
-</ion-list>
-
 </ion-content>
